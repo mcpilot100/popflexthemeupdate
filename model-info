@@ -1,0 +1,27 @@
+ {% when 'accordion2' %}
+             <div class="product-info-accordion accordion-model-info accordion2 {% unless block.settings.show_in_quickbuy %} not-in-quickbuy{% endunless %}" {{ block.shopify_attributes }}>
+                  {% render 'accordion2', allow_multi_open: true, add_content_class: 'rte cf', first_item_open: block.settings.open, item1_title: block.settings.title, item1_content: content %}
+                </div>
+            {%  if product.metafields.custom.model_info %}
+            <style>.model-info {display:none}
+              .product-info-accordion.accordion-model-info.accordion2.not-in-quickbuy {
+              margin-bottom:-51px;
+              </style>
+              {% else %}
+               <style>.accordion2 {display:none}
+              .model-info .cc-accordion {margin-bottom:0}
+              .model-info .cc-accordion .cc-accordion-item {border-bottom:0}
+              .product-info-accordion:last-child {margin-top:-50px}
+               }
+              
+              </style>
+              {% endif %}
+              {% if product.type contains 'Nutrition' %}<style>
+                .shipping-returns {margin-top:-50px;}</style>
+              {% endif %}
+           {% if product.type contains 'Bags' or product.url contains 'gift-card' or product.type contains 'Bottle'  or product.type contains 'Stationery' or product.type contains 'Nutrition' or product.type contains 'Kit'  or product.type contains 'Scrunchies' or product.type contains 'Headband' or product.type contains 'Gloves' or product.type contains 'Yoga Block'  or product.type contains 'Booty' or product.type contains 'Socks' or product.type contains 'Yoga Mats' %}
+                 <style>.model-info {
+                 display:none
+                 }
+             .materials-care {margin-top:-50px;}</style>
+                 {% endif %}
