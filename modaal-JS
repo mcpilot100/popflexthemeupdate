@@ -21,3 +21,38 @@ add
 leave last two  } 
 }
 as-is
+
+add to end: 
+   // Add item from popup and showing in mini cart		
+function addItem(v_id, but){		
+  but.innerHTML = '✓ Added';		
+  but.disabled =  true;		
+  let formData = {		
+   'items': [{		
+    'id': v_id,		
+    'quantity': 1		
+    }]		
+  };		
+  fetch(window.Shopify.routes.root + 'cart/add.js', {		
+    method: 'POST',		
+    headers: {		
+      'Content-Type': 'application/json'		
+    },		
+    body: JSON.stringify(formData)		
+  })		
+  .then(response => {		
+    return response.json();		
+  }).then(data =>{		
+    console.log(data);		
+      but.innerHTML = 'Add To Cart';		
+      but.disabled =  false;		
+    let cart_form = document.querySelector('cart-form')		
+      cart_form.refresh()		
+    $('a.cart-link[href="/cart"]')[0].click()		
+    $('.modaal-close')[0].click()		
+  })		
+  .catch((error) => {		
+    console.error('Error:', error);		
+  });		
+  		
+}
