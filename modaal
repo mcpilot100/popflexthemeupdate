@@ -1,0 +1,191 @@
+<!-- Default Product modal if no variant selected -->
+
+<style>
+/*   Add TO cart without selecting a variant popup */
+    .my-flex{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: baseline;
+  }
+  .modaal {
+    position: fixed;
+    z-index: 10000; /* 1 */
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  .modaal.is-visible {
+    visibility: visible;
+  }
+
+  .modaal-overlay {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: hsla(0, 0%, 0%, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.3s, opacity 0.3s;
+  }
+
+  .modaal.is-visible .modaal-overlay {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .modaal-wrapper {
+    position: absolute;
+    z-index: 9999;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    /*   margin-left: -16em; */
+    background-color: #fff;
+    box-shadow: 0 0 1.5em hsla(0, 0%, 0%, 0.35);
+    border-radius:10px;
+  }
+
+  .modaal-transition {
+    transition: top 0.75s ease;
+    transform: translateY(-10%);
+    top: 0;
+    opacity: 0;
+  }
+
+  .modaal.is-visible .modaal-transition {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    max-width: 100vw;
+    left: 50%;
+    top: 50%;
+    right: 0;
+    width: 98%;
+
+  }
+
+  .modaal-header,
+  .modaal-content {
+    padding: 1em;
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+
+  .modaal-header {
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.06);
+    border-bottom: 1px solid #e8e8e8;
+    border-radius:10px;
+  }
+
+  .modaal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    color: #aaa;
+    background: none;
+    border: 0;
+  }
+
+  .modaal-close:hover {
+    color: #777;
+  }
+
+  .modaal-heading {
+    font-size: 1.125em;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .modaal-content > *:first-child {
+    margin-top: 0;
+  }
+
+  .modaal-content > *:last-child {
+    margin-bottom: 0;
+  }
+.modaal-content::-webkit-scrollbar {
+    width: 5px!important;
+}
+
+.modaal-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+
+.modaal-content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background:#000 
+}
+  @media screen and (min-width: 767px){
+    .modaal.is-visible .modaal-transition {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+      max-width: 100vw;
+      left: 50%;
+      right: 0;
+      width: 400px;
+
+    }
+  }
+  .modaal-btn {
+  background:#fec48c;
+  padding: 8px 32px!important;
+    color:#000;
+  }
+  .modaal-btn:hover {
+  background:#000;
+  padding: 8px 32px!important;
+    color:#fec48c;
+    border-color:#000;
+  }
+/* End popup code */
+
+  </style>
+      
+  <svg display="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="768" height="800" viewBox="0 0 768 800"><defs><g id="icon-close"><path class="path1" d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z"></path></g></defs></svg>
+ <div class="modaal">
+    <div class="modaal-overlay modaal-toggle"></div>
+    <div class="modaal-wrapper modaal-transition">
+      <div class="modaal-header">
+        <button class="modaal-close modaal-toggle"><svg class="icon-close icon" viewBox="0 0 32 32"><use xlink:href="#icon-close"></use></svg></button>
+        <h2 class="modaal-heading">Please Select Your Size</h2>
+      </div>
+      
+      <div class="modaal-body">
+        <div class="modaal-content">
+
+          <div class="option-selectors">
+            {% for variant in product.variants %}
+            {% assign size = variant.title %}
+            {% if variant.available %}
+            <div class="my-flex">
+              {{ size }}
+              {% comment %}
+              {% for option in variant.options %}
+            <p>{{option}}</p>
+              {% endfor %}
+              {% endcomment %}
+              <button class="button button--large modaal-btn" onclick="addItem({{variant.id}}, this)" type="button">Add To Cart</button>
+            </div>
+            <hr>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      
+<!-- End Default Product modaal -->
