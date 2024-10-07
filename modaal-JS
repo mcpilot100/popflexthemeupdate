@@ -1,1 +1,23 @@
+after window.customElements.define('media-gallery', MediaGallery); add
 
+$(document).on('click','button.modaal-close.modaal-toggle, .modaal-overlay.modaal-toggle', function(){		
+          	$('.modaal.is-visible').removeClass('is-visible')		
+          })		
+
+
+after: 
+// Re-enable 'Add to Cart' button.		      // Re-enable 'Add to Cart' button.
+      this.submitBtn.classList.remove('is-loading');		      this.submitBtn.classList.remove('is-loading');
+      this.submitBtn.classList.remove('is-success');		      this.submitBtn.classList.remove('is-success');
+      this.submitBtn.removeAttribute('aria-disabled');
+
+add
+
+}		
+    }else{		
+      // if size option is not selected opening a popup		
+      $('.modaal').addClass('is-visible');
+
+leave last two  } 
+}
+as-is
