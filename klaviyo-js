@@ -1,0 +1,18 @@
+window.addEventListener("klaviyoForms", function(e) { 
+  var title = '';
+  if($('h1.majortitle').length && $('h1.majortitle').text() != ''){
+    title = $('h1.majortitle').text().trim()
+  }
+        if (e.detail.type == 'submit') {
+            if(e.detail.formId == "YxNhhy" || e.detail.formId == "QZ7mBx" || e.detail.formId == "T7xfkK" || e.detail.formId == "RZdaGE" || e.detail.formId == "XrgzwR"  || e.detail.formId == "UnGqeu" || e.detail.formId == "TyRBvB" || e.detail.formId == "Tc4DJP" || e.detail.formId == "RMhc74" || e.detail.formId ==  "TUYSTp" || e.detail.formId ==  "TyRBvB" || e.detail.formId ==  "VSGpPk" || e.detail.formId ==  "RsBA2a"){
+                console.log(e.detail.metaData.$email)
+                fetch('https://starapi.karangoyal.cc/api/popflex_yotpo/?formId='+e.detail.formId+'&email='+e.detail.metaData.$email+'&title='+title)
+.then(data => {
+return data;
+})
+.then(post => {
+console.log(post);
+});
+            }
+        }
+    });
