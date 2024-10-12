@@ -1,0 +1,22 @@
+<script>
+   window.__SWYM_SFL_ENABLE_DEV = {
+     "SFLFeatureEnabled": true,
+     "CartPageURL": "/cart",
+     "CartPageContainerSelector": ".container.cf",
+     "CartProductTileSelector": ".cart-item-list__body .cart-item",
+     "AddToSFLBtnSelector": "a.cart-item__remove.small-text.underline",
+     "AddToSFLButton": true,
+    "EnableSFLViewOnCart": false,
+    "EnableSFLViewOnWishlistUI": true,
+    "SFLAffectReminderPopup": true,
+    "SFLLayoutType": "Carousel",
+    "CartDrawer": {
+    "Enabled": true,
+    "ProductTileSelector": ".cart-item-list__body > div",
+    "ContainerSelector": ".cart-item-list__body",
+    "AddToSFLBtnSelector": ".cart-item__column.cart-item__quantity",
+    "CartDrawerButtonSelector": "a.cart-link",
+    "renderSFLButtonsOnFetchCart": true
+   }
+      }
+  </script>
