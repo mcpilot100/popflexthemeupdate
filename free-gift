@@ -1,0 +1,58 @@
+Theme file: (need correct coupon, also, need to uncomment commented lines) 
+ {% if settings.gift %}
+    <script defer>
+      setTimeout(()=>{
+//      https://www.popflexactive.com/discount/FREESUPERBAG25?add_free_gift=true
+      const urlParams = new URLSearchParams(window.location.search);
+      const myParam = urlParams.get('add_free_gift');
+      console.log(myParam)
+      if(myParam){
+          let formData = {
+           'items': [{
+            'id': {{settings.free_product.selected_or_first_available_variant.id}},
+            'quantity': 1
+            }]
+          };
+          fetch(window.Shopify.routes.root + 'cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+          })
+          .then(response => {
+            return response.json();
+          }).then(data =>{
+            console.log(data);
+            let cart_form = document.querySelector('cart-form')
+              cart_form.refresh()
+            //$('a.cart-link[href="/cart"]')[0].click()
+           // $('.modaal-close')[0].click()
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+      }, 1000)
+    </script>
+  {% endif %}
+
+
+ Settings.schema: 
+ {
+    "name": "Free Gift",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "gift",
+        "label": "Enable Free Gift",
+        "default": false
+      },
+      {
+        "type": "product",
+        "id": "free_product",
+        "label": "Product to add"
+      }
+    ]
+  },
+
